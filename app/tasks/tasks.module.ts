@@ -7,11 +7,11 @@ import { CommonModule }   from '@angular/common';
 import { TasksComponent }    from './tasks.component';
 import { TaskDetailComponent }  from './task-detail.component';
 import {TaskListComponent} from './task-list.component';
-import {tasksRouting} from "./tasks.routing";
+import {taskRouting} from "./tasks.routing";
 @NgModule({
     imports: [
         CommonModule,
-        tasksRouting
+        taskRouting
     ],
     declarations: [
         TasksComponent,

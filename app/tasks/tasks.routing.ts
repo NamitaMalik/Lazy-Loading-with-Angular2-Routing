@@ -12,7 +12,7 @@ import { TasksComponent }    from './tasks.component';
 import { TaskDetailComponent }  from './task-detail.component';
 import {TaskListComponent} from './task-list.component';
 
-const TasksRoutes: Routes  = [
+const taskRoutes: Routes  = [
     {
         path: 'tasks',
         component: TasksComponent,
@@ -29,4 +29,4 @@ const TasksRoutes: Routes  = [
     }
 ];
 
-export const tasksRouting: ModuleWithProviders = RouterModule.forChild(TasksRoutes);
+export const taskRouting: ModuleWithProviders = RouterModule.forChild(taskRoutes);

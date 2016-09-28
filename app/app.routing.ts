@@ -10,7 +10,7 @@ const appRoutes: Routes = [
         redirectTo: '/tasks',
         pathMatch: 'full'
     },
-    /*{ path: 'users', loadChildren: 'app/users/users.module#UsersModule' }*/
+    { path: 'users', loadChildren: 'app/users/users.module#UsersModule' }
 ];
 export const appRoutingProviders: any[] = [
 ];

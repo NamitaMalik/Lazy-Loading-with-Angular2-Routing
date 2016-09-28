@@ -1,12 +1,12 @@
 /**
- * Created by NamitaMalik on 9/27/2016.
+ * Created by NamitaMalik on 9/28/2016.
  */
 
 import { Component } from '@angular/core';
 @Component({
     template:  `
-    <h2>Your Tasks</h2>
+    <h2>Users List</h2>
     <router-outlet></router-outlet>
   `,
 })
-export class TasksComponent { }
+export class UsersComponent { }

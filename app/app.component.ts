@@ -4,12 +4,14 @@
 
 
 import {Component} from '@angular/core';
-
 @Component({
     selector: 'my-app',
     template: `
-  <span>My Application Title</span>
-  <router-outlet></router-outlet>
+     <nav>
+        <a  routerLink="/tasks"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Tasks</a>
+        <a  routerLink="/users">Users</a>
+      </nav>
+      <router-outlet></router-outlet>
     `
 
 })
