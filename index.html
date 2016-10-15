@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Lazy Loading with Angular2 Routing by NamitaMalik</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Lazy Loading with Angular2 Routing</h1>
+      <h2 class="project-tagline">This repository demonstrates lazy loading of modules using routing.</h2>
+      <a href="https://github.com/NamitaMalik/Lazy-Loading-with-Angular2-Routing" class="btn">View on GitHub</a>
+      <a href="https://github.com/NamitaMalik/Lazy-Loading-with-Angular2-Routing/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/NamitaMalik/Lazy-Loading-with-Angular2-Routing/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="lazy-loading-with-angular2-routing" class="anchor" href="#lazy-loading-with-angular2-routing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lazy Loading with Angular2 Routing</h1>
+
+<p>With <strong>Angular2</strong> finally going live, I decided to dig into its <strong>Router</strong> and got know about one of its cool features i.e. <strong>Lazy Loading of Modules</strong>.
+ If we go back to <strong>Angular1.x</strong> we know that there though we were defining <strong>Controller</strong> and <strong>Template</strong> for each route though the templates were getting
+ lazy loaded, but js files weren't. But <strong>Angular2</strong> has provided a good solution to it. So let's not get into the <code>coding mode</code> without wasting much time.</p>
+
+<p>So we have this small app which has basically 3 modules:</p>
+
+<ol>
+<li>AppModule - This is the parent module of the application</li>
+<li>TasksModule - This is the child module of <code>AppModule</code>
+</li>
+<li>
+<p>UsersModule - Child module of <code>AppModule</code>, sibling module of <code>TasksModule</code></p>
+
+<p>Following are various components in which the application has been divided:</p>
+</li>
+<li><p>AppComponent - This is the parent component of the application. Its the starting point in lay man's terms.</p></li>
+<li>TaskComponent - It is the parent component in the task module.</li>
+<li>TaskDetailComponent - This component is responsible for displaying details of the task.</li>
+<li>TaskListComponent - Component that displays list of tasks.</li>
+<li>UsersComponent - Container component for UserListComponent.</li>
+<li>UsersListComponent - Displays the list of users</li>
+</ol>
+
+<p>Before we move on further, let's note that there are 3 other important parts of this app:</p>
+
+<ol>
+<li>routing - This is the parent router for our application.</li>
+<li>taskRouting - This is the child router. Takes care of routing for tasks module.</li>
+<li>userRouting - Takes care of routing on users module.</li>
+</ol>
+
+<p>Now, let's see some code now:</p>
+
+<pre lang="app.module.ts"><code>import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { routing,
+    appRoutingProviders }  from './app.routing';
+import {TasksModule} from './tasks/tasks.module';
+
+@NgModule({
+    imports: [
+        BrowserModule,
+        routing,
+        TasksModule
+    ],
+    declarations: [
+        AppComponent
+    ],
+    providers: [
+        appRoutingProviders
+    ],
+    bootstrap: [ AppComponent ]})
+export class AppModule { }
+</code></pre>
+
+<blockquote>
+<p>I am assuming that readers of this blog have some idea about Angular2 and its routing but would still try to give overview of few things.</p>
+</blockquote>
+
+<p>In the above code you can see that we have imported <strong>NgModule</strong> and <strong>BrowserModule</strong>. We need <code>NgModule</code> decorator for defining module-level components, directives, pipes etc.
+<strong>BrowserModule</strong> includes directives such as <strong>NgIf</strong> and <strong>NgFor</strong> and also registers critical application service providers.
+We provide <code>AppComponent</code> in <strong>declarations</strong>, to tell <strong>Angular</strong> that  <code>AppComponent</code> belongs to <code>AppModule</code>. 
+<strong>bootstrap</strong> is to advise <strong>Angular</strong> to bootstrap <code>AppComponent</code> into the <strong>DOM</strong> once <strong>AppModule</strong> starts up.</p>
+
+<blockquote>
+<p>I hope you have noticed that we have only imported <strong>TasksModule</strong> but haven't imported the <code>UsersMoule</code>..well, that is what we intend to do here. Lazy load the modules
+as and when they are required. In this application, a user would land to task list page where he would see list of tasks. Hence we have imported the TasksModule here.</p>
+</blockquote>
+
+<p>Our <code>AppComponent</code> looks something like this:</p>
+
+<pre lang="app.component.ts"><code>import {Component} from '@angular/core';
+@Component({
+    selector: 'my-app',
+    template: `
+     &lt;nav&gt;
+        &lt;a  routerLink="/tasks"&gt;Tasks&lt;/a&gt;
+        &lt;a  routerLink="/users"&gt;Users&lt;/a&gt;
+      &lt;/nav&gt;
+      &lt;router-outlet&gt;&lt;/router-outlet&gt;
+    `
+})
+export class AppComponent {
+}
+</code></pre>
+
+<p>As you can see above, we have to anchor tags for navigation - one takes us to <code>tasks</code> page and another one takes us to <code>users</code> page. You can see <code>routerLink</code> property here which has a string path.</p>
+
+<p>Let's see <code>TasksModule</code>:</p>
+
+<pre lang="tasks.module.ts"><code>import { NgModule }       from '@angular/core';
+import { CommonModule }   from '@angular/common';
+import { TasksComponent }    from './tasks.component';
+import { TaskDetailComponent }  from './task-detail.component';
+import {TaskListComponent} from './task-list.component';
+import {taskRouting} from "./tasks.routing";
+@NgModule({
+    imports: [
+        CommonModule,
+        taskRouting
+    ],
+    declarations: [
+        TasksComponent,
+        TaskDetailComponent,
+        TaskListComponent
+    ]
+})
+export class TasksModule {}
+</code></pre>
+
+<p>And here are the various components:</p>
+
+<pre lang="tasks.component.ts"><code>import { Component } from '@angular/core';
+@Component({
+    template:  `
+    &lt;h2&gt;Your Tasks&lt;/h2&gt;
+    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+  `,
+})
+export class TasksComponent { }
+</code></pre>
+
+<pre lang="task-list.component.ts"><code>import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+
+@Component({
+    template: `
+    &lt;div&gt;
+        &lt;ul class="bubble"&gt;
+        &lt;li *ngFor="let task of tasks let i=index" (click)="onSelect(task)"&gt;
+        &lt;span&gt;{{i+1}}.&lt;/span&gt;
+        &lt;span&gt;{{task.title}}&lt;/span&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    `,
+})
+export class TaskListComponent {
+
+    constructor(private router: Router) {
+    }
+
+    private tasks = [{id: '1', title: 'Code Cleanup'}, {id: '2', title: 'Review Code'}, {
+        id: '3',
+        title: 'Build to Prod'
+    }];
+    private errorMessage: any = '';
+
+    onSelect(task) {
+        this.router.navigate(['/tasks', task.id]);
+    }
+}
+</code></pre>
+
+<p>In order to keep the demo as simple as possible, we have a small hard-coded list of tasks. We are displaying a list of tasks and on clicking on each task, user would be navigated to <code>taskdetail</code> page where details of a task would be displayed.</p>
+
+<pre lang="task-detail.component.ts"><code>import {Component} from '@angular/core';
+
+@Component({
+    template: `
+    &lt;div&gt;
+        &lt;span&gt;Some task detail to show up here.&lt;/span&gt;
+    &lt;/div&gt;
+    `
+})
+
+export class TaskDetailComponent {
+
+}
+</code></pre>
+
+<p>And here is the route configuration for our<code>tasks</code> module:</p>
+
+<pre lang="tasks.routing.ts"><code>import { ModuleWithProviders }  from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { TasksComponent }    from './tasks.component';
+import { TaskDetailComponent }  from './task-detail.component';
+import {TaskListComponent} from './task-list.component';
+
+const taskRoutes: Routes  = [
+    {
+        path: 'tasks',
+        component: TasksComponent,
+        children : [
+            {
+                path:'',
+                component:TaskListComponent
+            },
+            {
+                path:':id',
+                component: TaskDetailComponent,
+            }
+        ]
+    }
+];
+
+export const taskRouting: ModuleWithProviders = RouterModule.forChild(taskRoutes);
+</code></pre>
+
+<p>So when a user lands to the application, by default <code>tasks</code> module would be displayed to him. So when the path would be simply <code>/tasks</code>, user would see list of tasks and once
+user clicks on a particular task, id  would be added as the <strong>routeParam</strong> and route would change to '/tasks/id'(id of that particular task).</p>
+
+<p>Now, let's quickly have a look at the <code>users</code> module.</p>
+
+<pre lang="users.module.ts"><code>import { NgModule }       from '@angular/core';
+import { CommonModule }   from '@angular/common';
+import { UsersComponent }    from './users.component';
+import { UserListComponent }  from './user-list.component';
+import {usersRouting} from "./users.routes";
+@NgModule({
+    imports: [
+        CommonModule,
+        usersRouting
+    ],
+    declarations: [
+        UsersComponent,
+        UserListComponent
+    ]
+})
+export class UsersModule {}
+</code></pre>
+
+<p>and here is the <code>UsersComponent</code> which is the parent component for <code>UsersList</code>. Here are both the components:</p>
+
+<pre lang="users.component.ts"><code>import { Component } from '@angular/core';
+@Component({
+    template:  `
+    &lt;h2&gt;Users List&lt;/h2&gt;
+    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+  `,
+})
+export class UsersComponent { }
+</code></pre>
+
+<pre lang="user-list.component.ts"><code>import {Component} from '@angular/core';
+
+@Component({
+    template: `
+    &lt;div&gt;
+        &lt;ul class="bubble"&gt;
+        &lt;li *ngFor="let user of users let i=index"&gt;
+        &lt;span&gt;{{i+1}}.&lt;/span&gt;
+        &lt;span&gt;{{user.name}}&lt;/span&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    `,
+})
+
+export class UserListComponent {
+
+    private users = [{id: '1', name: 'John Doe'}, {id: '2', name: 'Jane Roe'}, {
+        id: '3',
+        name: 'John Smith'
+    }];
+}
+</code></pre>
+
+<p>and here is the routing for <code>Users</code> module:</p>
+
+<pre lang="users.routing.ts"><code>import { ModuleWithProviders }  from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { UsersComponent }    from './users.component';
+import { UserListComponent }  from './user-list.component';
+
+const usersRoutes: Routes  = [
+    {
+        path: '',
+        component: UsersComponent,
+        children : [
+            {
+                path:'',
+                component:UserListComponent
+            }
+        ]
+    }
+];
+
+export const usersRouting: ModuleWithProviders = RouterModule.forChild(usersRoutes);
+</code></pre>
+
+<p>Let's quickly move onto the place where all the magic happens i.e. <code>app.routing.ts</code>:</p>
+
+<pre lang="app.routing.ts"><code>import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+const appRoutes: Routes = [
+    {
+        path: '',
+        redirectTo: '/tasks',
+        pathMatch: 'full'
+    },
+    { path: 'users', loadChildren: 'app/users/users.module#UsersModule' }
+];
+export const appRoutingProviders: any[] = [
+];
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+</code></pre>
+
+<p>Well, as you can see in the above code, by default our tasks module would get loaded. When the route changes to '/users', the routes module would be loaded. This has been achieved
+using the <code>loadChildren</code> property defined on the route. Angular will fetch the module at the location and then load the routes defined in its
+router config. So we did not load <code>UsersModule</code> in our <code>AppComponent</code>, instead used <code>loadChildren</code> property in the routing config.</p>
+
+<p>Here is the quick view of what is happening:</p>
+
+<p>You can see tasks module gets loaded initially whereas the users module gets loaded only when we click on the Users tab.</p>
+
+<p>I'll be back again with a new post soon, till then Happy Learning!</p>
+
+<h2>
+<a id="follow-me" class="anchor" href="#follow-me" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Follow Me</h2>
+
+<p><a href="https://github.com/NamitaMalik">Github</a></p>
+
+<p><a href="https://twitter.com/namita13_04">Twitter</a></p>
+
+<p><a href="https://in.linkedin.com/in/namita-malik-a7885b23">LinkedIn</a></p>
+
+<p><a href="https://namitamalik.github.io/">More Blogs By Me</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/NamitaMalik/Lazy-Loading-with-Angular2-Routing">Lazy Loading with Angular2 Routing</a> is maintained by <a href="https://github.com/NamitaMalik">NamitaMalik</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
