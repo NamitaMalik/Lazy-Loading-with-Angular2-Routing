@@ -2,22 +2,22 @@
  * Created by NamitaMalik on 9/28/2016.
  */
 
-import { ModuleWithProviders }  from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { UsersComponent }    from './users.component';
-import { UserListComponent }  from './user-list.component';
+import {ModuleWithProviders}  from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {UsersComponent}    from './users.component';
+import {UserListComponent}  from './user-list.component';
 
-const usersRoutes: Routes  = [
+const usersRoutes:Routes = <any>[
     {
         path: '',
         component: UsersComponent,
-        children : [
+        children: [
             {
-                path:'',
-                component:UserListComponent
+                path: '',
+                component: UserListComponent
             }
         ]
     }
 ];
 
-export const usersRouting: ModuleWithProviders = RouterModule.forChild(usersRoutes);
+export const usersRouting:ModuleWithProviders = RouterModule.forChild(usersRoutes);

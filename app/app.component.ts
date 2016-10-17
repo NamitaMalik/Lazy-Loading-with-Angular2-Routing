@@ -1,9 +1,8 @@
 /**
  * Created by NamitaMalik on 9/27/2016.
  */
-
-
 import {Component} from '@angular/core';
+
 @Component({
     selector: 'my-app',
     template: `
@@ -13,7 +12,6 @@ import {Component} from '@angular/core';
       </nav>
       <router-outlet></router-outlet>
     `
-
 })
 
 export class AppComponent {

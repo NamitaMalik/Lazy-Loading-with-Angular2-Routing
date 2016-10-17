@@ -1,12 +1,12 @@
 /**
  * Created by NamitaMalik on 9/28/2016.
  */
-
-import { NgModule }       from '@angular/core';
-import { CommonModule }   from '@angular/common';
-import { UsersComponent }    from './users.component';
-import { UserListComponent }  from './user-list.component';
+import {NgModule}       from '@angular/core';
+import {CommonModule}   from '@angular/common';
+import {UsersComponent}    from './users.component';
+import {UserListComponent}  from './user-list.component';
 import {usersRouting} from "./users.routing";
+
 @NgModule({
     imports: [
         CommonModule,
@@ -17,4 +17,5 @@ import {usersRouting} from "./users.routing";
         UserListComponent
     ]
 })
-export class UsersModule {}
+export class UsersModule {
+}
