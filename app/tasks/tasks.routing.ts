@@ -1,7 +1,6 @@
 /**
  * Created by namita on 7/10/16.
  */
-
 import {ModuleWithProviders}  from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {TasksComponent}    from './tasks.component';
