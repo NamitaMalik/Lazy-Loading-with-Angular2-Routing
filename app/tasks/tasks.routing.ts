@@ -10,7 +10,7 @@ import {TasksListComponent} from './tasks-list.component';
 
 const TASKS_ROUTES:Routes = <any>[
     {
-        path: 'tasks',
+        path: '',
         component: TasksComponent,
         children: [
             {

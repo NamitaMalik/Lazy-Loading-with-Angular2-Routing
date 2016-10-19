@@ -5,11 +5,8 @@ import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 const APP_ROUTES:Routes = [
-    {
-        path: '',
-        redirectTo: '/tasks',
-        pathMatch: 'full'
-    },
+    {path: '', redirectTo: '/tasks', pathMatch: 'full'},
+    {path: 'tasks', loadChildren: 'app/tasks/tasks.module#TasksModule'},
     {path: 'users', loadChildren: 'app/users/users.module#UsersModule'}
 ];
 export const appRoutingProviders:any[] = [];
