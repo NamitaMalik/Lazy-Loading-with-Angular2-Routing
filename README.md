@@ -23,9 +23,9 @@ Following are various components in which the application has been divided:
 
 Before we move on further, let's note that there are 3 other important parts of this app:
 
-1. Routing - This is the parent router for our application.
-2. TaskRouting - This is the child router. Takes care of routing for tasks module.
-3. UserRouting - Takes care of routing on users module.
+1. ROUTING - This is the parent router for our application.
+2. TASKS_ROUTING - This is the child router. Takes care of routing for tasks module.
+3. USERS_ROUTING - Takes care of routing on users module.
 
 Now, let's see some code now:
 

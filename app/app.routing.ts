@@ -4,7 +4,7 @@
 import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-const appRoutes:Routes = [
+const APP_ROUTES:Routes = [
     {
         path: '',
         redirectTo: '/tasks',
@@ -13,4 +13,4 @@ const appRoutes:Routes = [
     {path: 'users', loadChildren: 'app/users/users.module#UsersModule'}
 ];
 export const appRoutingProviders:any[] = [];
-export const routing:ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const APP_ROUTING:ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);

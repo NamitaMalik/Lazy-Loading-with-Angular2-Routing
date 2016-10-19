@@ -8,7 +8,7 @@ import {TasksComponent}    from './tasks.component';
 import {TaskDetailComponent}  from './task-detail.component';
 import {TaskListComponent} from './task-list.component';
 
-const taskRoutes:Routes = <any>[
+const TASKS_ROUTES:Routes = <any>[
     {
         path: 'tasks',
         component: TasksComponent,
@@ -25,4 +25,4 @@ const taskRoutes:Routes = <any>[
     }
 ];
 
-export const taskRouting:ModuleWithProviders = RouterModule.forChild(taskRoutes);
+export const TASKS_ROUTING:ModuleWithProviders = RouterModule.forChild(TASKS_ROUTES);
