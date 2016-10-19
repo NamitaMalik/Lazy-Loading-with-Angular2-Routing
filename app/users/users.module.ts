@@ -4,7 +4,7 @@
 import {NgModule}       from '@angular/core';
 import {CommonModule}   from '@angular/common';
 import {UsersComponent}    from './users.component';
-import {UserListComponent}  from './user-list.component';
+import {UsersListComponent}  from './users-list.component';
 import {USERS_ROUTING} from "./users.routing";
 
 @NgModule({
@@ -14,7 +14,7 @@ import {USERS_ROUTING} from "./users.routing";
     ],
     declarations: [
         UsersComponent,
-        UserListComponent
+        UsersListComponent
     ]
 })
 export class UsersModule {

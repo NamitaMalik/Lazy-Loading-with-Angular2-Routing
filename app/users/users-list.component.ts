@@ -16,9 +16,10 @@ import {Component} from '@angular/core';
     `,
 })
 
-export class UserListComponent {
-    private users = [{id: '1', name: 'John Doe'}, {id: '2', name: 'Jane Roe'}, {
-        id: '3',
-        name: 'John Smith'
-    }];
+export class UsersListComponent {
+    private users = [
+        {id: '1', name: 'John Doe'},
+        {id: '2', name: 'Jane Roe'},
+        {id: '3', name: 'John Smith'}
+    ];
 }

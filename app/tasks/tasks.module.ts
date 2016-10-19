@@ -5,7 +5,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TasksComponent} from './tasks.component';
 import {TaskDetailComponent} from './task-detail.component';
-import {TaskListComponent} from './task-list.component';
+import {TasksListComponent} from './tasks-list.component';
 import {TASKS_ROUTING} from "./tasks.routing";
 
 @NgModule({
@@ -16,7 +16,7 @@ import {TASKS_ROUTING} from "./tasks.routing";
     declarations: [
         TasksComponent,
         TaskDetailComponent,
-        TaskListComponent
+        TasksListComponent
     ]
 })
 export class TasksModule {

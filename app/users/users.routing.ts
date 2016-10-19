@@ -4,7 +4,7 @@
 import {ModuleWithProviders}  from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {UsersComponent}    from './users.component';
-import {UserListComponent}  from './user-list.component';
+import {UsersListComponent}  from './users-list.component';
 
 const USERS_ROUTES:Routes = <any>[
     {
@@ -13,7 +13,7 @@ const USERS_ROUTES:Routes = <any>[
         children: [
             {
                 path: '',
-                component: UserListComponent
+                component: UsersListComponent
             }
         ]
     }

@@ -6,7 +6,7 @@ import {ModuleWithProviders}  from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {TasksComponent}    from './tasks.component';
 import {TaskDetailComponent}  from './task-detail.component';
-import {TaskListComponent} from './task-list.component';
+import {TasksListComponent} from './tasks-list.component';
 
 const TASKS_ROUTES:Routes = <any>[
     {
@@ -15,7 +15,7 @@ const TASKS_ROUTES:Routes = <any>[
         children: [
             {
                 path: '',
-                component: TaskListComponent
+                component: TasksListComponent
             },
             {
                 path: ':id',

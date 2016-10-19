@@ -15,9 +15,9 @@ So we have this small app which has basically 3 modules:
 Following are various components in which the application has been divided:
 
 1. AppComponent - This is the parent component of the application. Its the starting point in lay man's terms.
-2. TaskComponent - It is the parent component in the task module.
+2. TasksComponent - It is the parent component in the task module.
 3. TaskDetailComponent - This component is responsible for displaying details of the task.
-4. TaskListComponent - Component that displays list of tasks.
+4. TasksListComponent - Component that displays list of tasks.
 5. UsersComponent - Container component for UserListComponent.
 6. UsersListComponent - Displays the list of users
 

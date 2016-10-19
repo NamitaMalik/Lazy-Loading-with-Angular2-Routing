@@ -17,7 +17,7 @@ import {Router} from '@angular/router';
     `,
 })
 
-export class TaskListComponent {
+export class TasksListComponent {
 
     constructor(private router:Router) {
     }
