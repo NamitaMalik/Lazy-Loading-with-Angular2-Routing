@@ -1,10 +1,8 @@
 # Lazy Loading with Angular2 Routing
 
-###This paragraph should be more readable - Start
-With **Angular2** finally going live, I decided to dig into its **Router** and got know about one of its cool features i.e. **Lazy Loading of Modules**.
-If we go back to **Angular1.x** we know that there though we were defining **Controller** and **Template** for each route though the templates were getting
-lazy loaded, but js files weren't. But **Angular2** has provided a good solution to it. So let's not get into the `coding mode` without wasting much time.
-###This paragraph should be more readable - END
+Let's dig into one of the cool features of **Angular2 Router** i.e. **Lazy Loading of Modules**.
+If we go back to **Angular 1.x** we know that, there we were defining **Controller** and **Template** for each route, while templates were getting
+lazy loaded, but js files weren't. But in **Angular2** it is possible to load your modules as and when they are required. So let's not get into the `coding mode`.
 
 So we have this small app which has basically 3 modules:
 
@@ -14,7 +12,7 @@ So we have this small app which has basically 3 modules:
 
 Following are various components in which the application has been divided:
 
-1. AppComponent - This is the parent component of the application. Its the starting point in lay man's terms.
+1. AppComponent - This is the parent component of the application.
 2. TasksComponent - It is the parent component in the tasks module.
 3. TaskDetailComponent - This component is responsible for displaying details of the task.
 4. TasksListComponent - Component that displays list of tasks.
@@ -55,9 +53,9 @@ export class AppModule {
 > I am assuming that readers of this blog have some idea about Angular2 and its routing but would still try to give overview of few things.
 
 In the above code you can see that we have imported **NgModule** and **BrowserModule**. We need `NgModule` decorator for defining module-level components, directives, pipes etc.
-**BrowserModule** includes directives such as **NgIf** and **NgFor** and also registers critical application service providers.
+**BrowserModule** registers critical application service providers and also re-exports CommonModule from `@angular/common`.
 We provide `AppComponent` in **declarations**, to tell **Angular** that  `AppComponent` belongs to `AppModule`. 
-**bootstrap** is to advise **Angular** to bootstrap `AppComponent` into the **DOM** once **AppModule** starts up.
+**bootstrap** is to advise **Angular** to bootstrap `AppComponent` into the **DOM** once `AppModule` starts.
 
 Our `AppComponent` looks something like this:
 
@@ -107,6 +105,7 @@ export class TasksModule {
 }
 ```
 
+We have imported **CommonModule** because it provides important directives such as **NgIf** and **NgFor**.
 And here are the various components:
 
 ```tasks.component.ts
@@ -311,18 +310,16 @@ export const APP_ROUTING:ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
 ```
 
 Well, as you can see in the above code, since by default we are redirecting our page to `tasks` so our tasks module would get loaded. When the route changes to '/users', the routes module would be loaded. This has been achieved
-using the `loadChildren` property defined on the route. Angular will fetch the module at the location and then load the routes defined in its router config. 
+using the `loadChildren` property defined on the route. **Angular** will fetch the module at the location and then load the routes defined in its router config. 
 So we did not load `UsersModule` and `TasksModule` in our `AppComponent`, instead used `loadChildren` property in the routing config.
 
 Here is the quick view of what is happening:
 
 ![view.gif](https://raw.githubusercontent.com/NamitaMalik/Lazy-Loading-with-Angular2-Routing/master/assets/view.gif)
 
+You can see tasks module gets loaded only when we click on the Tasks link. Similarly, users module also gets when we click on the Users link.
 
-
-You can see tasks module gets loaded initially whereas the users module gets loaded only when we click on the Users tab.
-
-I'll be back again with a new post soon, till then Happy Learning!
+Well that's all for now. I'll be back again with a new post soon, till then Happy Learning!
 
 Follow Me
 ---
