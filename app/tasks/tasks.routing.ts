@@ -1,32 +1,27 @@
 /**
- * Created by NamitaMalik on 9/27/2016.
- */
-
-/**
  * Created by namita on 7/10/16.
  */
+import {ModuleWithProviders}  from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {TasksComponent}    from './tasks.component';
+import {TaskDetailComponent}  from './task-detail.component';
+import {TasksListComponent} from './tasks-list.component';
 
-import { ModuleWithProviders }  from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { TasksComponent }    from './tasks.component';
-import { TaskDetailComponent }  from './task-detail.component';
-import {TaskListComponent} from './task-list.component';
-
-const taskRoutes: Routes  = [
+const TASKS_ROUTES:Routes = <any>[
     {
-        path: 'tasks',
+        path: '',
         component: TasksComponent,
-        children : [
+        children: [
             {
-                path:'',
-                component:TaskListComponent
+                path: '',
+                component: TasksListComponent
             },
             {
-                path:':id',
+                path: ':id',
                 component: TaskDetailComponent,
             }
         ]
     }
 ];
 
-export const taskRouting: ModuleWithProviders = RouterModule.forChild(taskRoutes);
+export const TASKS_ROUTING:ModuleWithProviders = RouterModule.forChild(TASKS_ROUTES);
