@@ -310,11 +310,13 @@ export const appRoutingProviders:any[] = [];
 export const APP_ROUTING:ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
 ```
 
-Well, as you can see in the above code, by default our tasks module would get loaded. When the route changes to '/users', the routes module would be loaded. This has been achieved
-using the `loadChildren` property defined on the route. Angular will fetch the module at the location and then load the routes defined in its
-router config. So we did not load `UsersModule` in our `AppComponent`, instead used `loadChildren` property in the routing config.
+Well, as you can see in the above code, since by default we are redirecting our page to `tasks` so our tasks module would get loaded. When the route changes to '/users', the routes module would be loaded. This has been achieved
+using the `loadChildren` property defined on the route. Angular will fetch the module at the location and then load the routes defined in its router config. 
+So we did not load `UsersModule` and `TasksModule` in our `AppComponent`, instead used `loadChildren` property in the routing config.
 
 Here is the quick view of what is happening:
+
+![view.gif](https://raw.githubusercontent.com/NamitaMalik/Lazy-Loading-with-Angular2-Routing/master/assets/view.gif)
 
 
 
