@@ -1,6 +1,6 @@
 # Lazy Loading with Angular2 Routing
 
-Let's dig into one of the cool features of **Angular2 Router** i.e. **Lazy Loading of Modules**.
+Let's dive into one of the cool features of **Angular2 Router** i.e. **Lazy Loading of Modules**.
 If we go back to **Angular 1.x** we know that, there we were defining **Controller** and **Template** for each route, while templates were getting
 lazy loaded, but js files weren't. But in **Angular2** it is possible to load your modules as and when they are required. So let's not get into the `coding mode`.
 
