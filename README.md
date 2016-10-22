@@ -23,7 +23,7 @@ Before we move on further, let's note that there are 3 other important parts of 
 
 1. ROUTING - This is the main router for our application.
 2. TASKS_ROUTING - This is the child router. Takes care of routing for tasks module.
-3. USERS_ROUTING - Takes care of routing on users module.
+3. USERS_ROUTING - Takes care of routing for users module.
 
 Now, let's see some code now:
 
@@ -53,7 +53,7 @@ export class AppModule {
 > I am assuming that readers of this blog have some idea about Angular2 and its routing but would still try to give overview of few things.
 
 In the above code you can see that we have imported **NgModule** and **BrowserModule**. We need `NgModule` decorator for defining module-level components, directives, pipes etc.
-**BrowserModule** registers critical application service providers and also re-exports CommonModule from `@angular/common`.
+**BrowserModule** registers critical application service providers and also re-exports **CommonModule** from `@angular/common`.
 We provide `AppComponent` in **declarations**, to tell **Angular** that  `AppComponent` belongs to `AppModule`. 
 **bootstrap** is to advise **Angular** to bootstrap `AppComponent` into the **DOM** once `AppModule` starts.
 
@@ -77,7 +77,7 @@ export class AppComponent {
 }
 ```
 
-As you can see above, we have to anchor tags for navigation - one takes us to `tasks` page and another one takes us to `users` page. 
+As you can see above, we have two anchor tags for navigation - one takes us to `tasks` page and another one takes us to `users` page. 
 You can see `routerLink` property here which has a string path.
 
 Let's see `TasksModule`:
@@ -311,7 +311,7 @@ export const APP_ROUTING:ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
 
 Well, as you can see in the above code, since by default we are redirecting our page to `tasks` so our tasks module would get loaded. When the route changes to '/users', the routes module would be loaded. This has been achieved
 using the `loadChildren` property defined on the route. **Angular** will fetch the module at the location and then load the routes defined in its router config. 
-So we did not load `UsersModule` and `TasksModule` in our `AppComponent`, instead used `loadChildren` property in the routing config.
+So we did not load `UsersModule` and `TasksModule` in our `AppComponent`, instead used `loadChildren` property in the routing config to lazy load our modules.
 
 Here is the quick view of what is happening:
 
