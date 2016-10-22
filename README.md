@@ -6,13 +6,13 @@ lazy loaded, but js files weren't. But in **Angular2** it is possible to load yo
 
 So we have this small app which has basically 3 modules:
 
-1. AppModule - This is the parent module of the application
+1. AppModule - This is the root module of the application
 2. TasksModule - This is the child module of `AppModule`
 3. UsersModule - Child module of `AppModule`, sibling module of `TasksModule`
 
 Following are various components in which the application has been divided:
 
-1. AppComponent - This is the parent component of the application.
+1. AppComponent - This is the root component of the application.
 2. TasksComponent - It is the parent component in the tasks module.
 3. TaskDetailComponent - This component is responsible for displaying details of the task.
 4. TasksListComponent - Component that displays list of tasks.
@@ -21,7 +21,7 @@ Following are various components in which the application has been divided:
 
 Before we move on further, let's note that there are 3 other important parts of this app:
 
-1. ROUTING - This is the parent router for our application.
+1. ROUTING - This is the main router for our application.
 2. TASKS_ROUTING - This is the child router. Takes care of routing for tasks module.
 3. USERS_ROUTING - Takes care of routing on users module.
 
