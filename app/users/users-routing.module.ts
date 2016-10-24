@@ -1,7 +1,7 @@
 /**
  * Created by NamitaMalik on 9/28/2016.
  */
-import { NgModule }     from '@angular/core';
+import {NgModule}     from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {UsersComponent}    from './users.component';
 import {UsersListComponent}  from './users-list.component';
@@ -26,4 +26,5 @@ import {UsersListComponent}  from './users-list.component';
         RouterModule
     ]
 })
-export class UsersRoutingModule { }
+export class UsersRoutingModule {
+}

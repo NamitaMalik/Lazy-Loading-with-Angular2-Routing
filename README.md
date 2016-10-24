@@ -31,18 +31,15 @@ Now, let's see some code now:
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
-import {APP_ROUTING, appRoutingProviders} from './app.routing';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
     imports: [
         BrowserModule,
-        APP_ROUTING
+        AppRoutingModule
     ],
     declarations: [
         AppComponent
-    ],
-    providers: [
-        appRoutingProviders
     ],
     bootstrap: [AppComponent]
 })
@@ -88,12 +85,12 @@ import {CommonModule} from '@angular/common';
 import {TasksComponent} from './tasks.component';
 import {TaskDetailComponent} from './task-detail.component';
 import {TasksListComponent} from './tasks-list.component';
-import {TASKS_ROUTING} from "./tasks.routing";
+import {TasksRoutingModule} from "./tasks-routing.module";
 
 @NgModule({
     imports: [
         CommonModule,
-        TASKS_ROUTING
+        TasksRoutingModule
     ],
     declarations: [
         TasksComponent,
@@ -174,33 +171,40 @@ export class TaskDetailComponent {
 }
 ```
 
-And here is the route configuration for our`tasks` module:
+And here is the`TasksRoutingModule` which has route configuration for our`tasks` module:
 
-```tasks.routing.ts
-import {ModuleWithProviders}  from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+```tasks-routing.module.ts
+import {NgModule}     from '@angular/core';
+import {RouterModule} from '@angular/router';
 import {TasksComponent}    from './tasks.component';
 import {TaskDetailComponent}  from './task-detail.component';
 import {TasksListComponent} from './tasks-list.component';
 
-const TASKS_ROUTES:Routes = <any>[
-    {
-        path: '',
-        component: TasksComponent,
-        children: [
+@NgModule({
+    imports: [
+        RouterModule.forChild([
             {
                 path: '',
-                component: TasksListComponent
-            },
-            {
-                path: ':id',
-                component: TaskDetailComponent,
+                component: TasksComponent,
+                children: [
+                    {
+                        path: '',
+                        component: TasksListComponent
+                    },
+                    {
+                        path: ':id',
+                        component: TaskDetailComponent,
+                    }
+                ]
             }
-        ]
-    }
-];
-
-export const TASKS_ROUTING:ModuleWithProviders = RouterModule.forChild(TASKS_ROUTES);
+        ])
+    ],
+    exports: [
+        RouterModule
+    ]
+})
+export class TasksRoutingModule {
+}
 ```
 
 So when a user lands to the application, by default `tasks` module would be displayed to him. So when the path would be simply `/tasks`, user would see list of tasks and once
@@ -213,12 +217,12 @@ import {NgModule}       from '@angular/core';
 import {CommonModule}   from '@angular/common';
 import {UsersComponent}    from './users.component';
 import {UsersListComponent}  from './users-list.component';
-import {USERS_ROUTING} from "./users.routing";
+import {UsersRoutingModule} from "./users-routing.module";
 
 @NgModule({
     imports: [
         CommonModule,
-        USERS_ROUTING
+        UsersRoutingModule
     ],
     declarations: [
         UsersComponent,
@@ -273,40 +277,56 @@ export class UsersListComponent {
 and here is the routing for `Users` module:
 
 ```users.routing.ts
-import {ModuleWithProviders}  from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {NgModule}     from '@angular/core';
+import {RouterModule} from '@angular/router';
 import {UsersComponent}    from './users.component';
 import {UsersListComponent}  from './users-list.component';
 
-const USERS_ROUTES:Routes = <any>[
-    {
-        path: '',
-        component: UsersComponent,
-        children: [
+
+@NgModule({
+    imports: [
+        RouterModule.forChild([
             {
                 path: '',
-                component: UsersListComponent
+                component: UsersComponent,
+                children: [
+                    {
+                        path: '',
+                        component: UsersListComponent
+                    }
+                ]
             }
-        ]
-    }
-];
-
-export const USERS_ROUTING:ModuleWithProviders = RouterModule.forChild(USERS_ROUTES);
+        ])
+    ],
+    exports: [
+        RouterModule
+    ]
+})
+export class UsersRoutingModule {
+}
 ```
 
-Let's quickly move onto the place where all the magic happens i.e. `app-routing.module.ts`:
+Let's quickly move onto the place where all the magic happens i.e. `AppRoutingModule`:
 
-```app.routing.ts
-import {ModuleWithProviders} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+```app-routing.module.ts
+import {NgModule}     from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-const APP_ROUTES:Routes = [
-    {path: '', redirectTo: '/tasks', pathMatch: 'full'},
-    {path: 'tasks', loadChildren: 'app/tasks/tasks.module#TasksModule'},
-    {path: 'users', loadChildren: 'app/users/users.module#UsersModule'}
-];
-export const appRoutingProviders:any[] = [];
-export const APP_ROUTING:ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
+
+@NgModule({
+    imports: [
+        RouterModule.forRoot([
+            {path: '', redirectTo: '/tasks', pathMatch: 'full'},
+            {path: 'tasks', loadChildren: 'app/tasks/tasks.module#TasksModule'},
+            {path: 'users', loadChildren: 'app/users/users.module#UsersModule'}
+        ])
+    ],
+    exports: [
+        RouterModule
+    ]
+})
+export class AppRoutingModule {
+}
 ```
 
 Well, as you can see in the above code, since by default we are redirecting our page to `tasks` so our tasks module would get loaded. When the route changes to '/users', the routes module would be loaded. This has been achieved
