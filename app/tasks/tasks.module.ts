@@ -6,12 +6,12 @@ import {CommonModule} from '@angular/common';
 import {TasksComponent} from './tasks.component';
 import {TaskDetailComponent} from './task-detail.component';
 import {TasksListComponent} from './tasks-list.component';
-import {TASKS_ROUTING} from "./tasks.routing";
+import {TasksRoutingModule} from "./tasks-routing.module";
 
 @NgModule({
     imports: [
         CommonModule,
-        TASKS_ROUTING
+        TasksRoutingModule
     ],
     declarations: [
         TasksComponent,
