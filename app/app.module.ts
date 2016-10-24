@@ -4,18 +4,17 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
-import {APP_ROUTING, appRoutingProviders} from './app.routing';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
     imports: [
         BrowserModule,
-        APP_ROUTING
+        AppRoutingModule
     ],
     declarations: [
         AppComponent
     ],
     providers: [
-        appRoutingProviders
     ],
     bootstrap: [AppComponent]
 })

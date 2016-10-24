@@ -294,7 +294,7 @@ const USERS_ROUTES:Routes = <any>[
 export const USERS_ROUTING:ModuleWithProviders = RouterModule.forChild(USERS_ROUTES);
 ```
 
-Let's quickly move onto the place where all the magic happens i.e. `app.routing.ts`:
+Let's quickly move onto the place where all the magic happens i.e. `app-routing.module.ts`:
 
 ```app.routing.ts
 import {ModuleWithProviders} from '@angular/core';
