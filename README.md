@@ -341,7 +341,7 @@ Here is the quick view of what is happening:
 You can see tasks module gets loaded only when we click on the Tasks link. Similarly, users module also gets when we click on the Users link.
 
 Well that's all for now, though **lazy loading** is an advantage of **Angular Router**, it has a disadvantage too i.e. there would be some waiting every time when a new module is being loaded. This issue can be resolved using **preloading** of modules which
-I'll be discussing in my next blog..till then Happy Learning!
+I'll be discussing in my upcoming blog..till then Happy Learning!
 
 Follow Me
 ---
