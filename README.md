@@ -311,6 +311,7 @@ export const APP_ROUTING:ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
 
 Well, as you can see in the above code, since by default we are redirecting our page to `tasks` so our tasks module would get loaded. When the route changes to '/users', the routes module would be loaded. This has been achieved
 using the `loadChildren` property defined on the route. **Angular** will fetch the module at the location and then load the routes defined in its router config. 
+The path to the file and name of the module is separated by `#`. The **Router** reads the `ModuleName` given after `#` and loads the module accordingly. 
 So we did not load `UsersModule` and `TasksModule` in our `AppComponent`, instead used `loadChildren` property in the routing config to lazy load our modules.
 
 Here is the quick view of what is happening:
@@ -319,7 +320,8 @@ Here is the quick view of what is happening:
 
 You can see tasks module gets loaded only when we click on the Tasks link. Similarly, users module also gets when we click on the Users link.
 
-Well that's all for now. I'll be back again with a new post soon, till then Happy Learning!
+Well that's all for now, though **lazy loading** is an advantage of **Angular Router**, it has a disadvantage too i.e. there would be some waiting every time when a new module is being loaded. This issue can be resolved using **preloading** of modules which
+I'll be discussing in my next blog..till then Happy Learning!
 
 Follow Me
 ---
