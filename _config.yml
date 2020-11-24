@@ -1,0 +1,8 @@
+title: Lazy Loading with Angular2 Routing
+description: This blog discusses lazy loading of modules using routing.
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-hacker
+
+gems:
+  - jekyll-mentions
